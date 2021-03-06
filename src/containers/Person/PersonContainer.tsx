@@ -6,7 +6,7 @@ import { setFind } from './store';
 export function PersonContainer() {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(setFind('Martin+Scorsese'))
+        dispatch(setFind('Martin'))
     }, [])
     return <div>
         dassadsas
