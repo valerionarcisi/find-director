@@ -1,42 +1,27 @@
 import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
-
-export type MovieOverview = {
-    adult: false,
-    genreIds: number[],
-    id: number,
-    mediaType: string,
-    originalLanguage: string,
-    originalTitle: string
-    overview: string
-    posterPath: string,
-    releaseDate: string,
-    title: string,
-    voteAverage: number,
-    voteCount: number
-}
-
-export type Person = {
-    adult: boolean
-    gender: number
-    id: number
-    knowFor: MovieOverview[]
-    knownForDepartment: string,
-    name: string,
-    popularity: number,
-    profilePath: string
-}
-
+import { ApiState } from '../../service/api.model'
+import { Person } from './model'
 export interface IPersonState {
-    data: Person | null,
+    byIds: { [key: string]: Person } | null,
+    allIds: number[],
+    currentPage: number | null,
+    totalPages: number | null,
+    totalResults: number | null,
     searched: string | null,
-    isLoading: boolean,
+    loading: ApiState.IDLE | ApiState.PENDING | ApiState.FAILED | ApiState.SUCCEEDED,
     errorMsg: string | null
 }
 
+export type PersonSucceededPayload = Partial<IPersonState>
+
 export const initialState: IPersonState = {
-    data: null,
+    byIds: null,
+    allIds: [],
+    currentPage: null,
+    totalPages: null,
+    totalResults: null,
     searched: null,
-    isLoading: false,
+    loading: ApiState.IDLE,
     errorMsg: null
 }
 
@@ -45,14 +30,15 @@ export const featureKey = 'person'
 export enum PersonActionsType {
     SET_FIND = 'person/set/searched',
     RESET_FIND = 'person/reset/searched',
-    FETCH_SUCCESS = 'person/api/fetch/success',
+    FETCH_SUCCEEDED = 'person/api/fetch/success',
     FETCH_PENDING = 'person/api/fetch/pending',
     FETCH_FAILED = 'person/api/fetch/failed',
 }
 
+
 export const setFind = createAction<string>(PersonActionsType.SET_FIND)
 export const resetFind = createAction(PersonActionsType.RESET_FIND)
-export const success = createAction<Person>(PersonActionsType.FETCH_SUCCESS)
+export const successded = createAction<PersonSucceededPayload>(PersonActionsType.FETCH_SUCCEEDED)
 export const falied = createAction<string>(PersonActionsType.FETCH_FAILED)
 export const pending = createAction(PersonActionsType.FETCH_PENDING)
 
@@ -63,9 +49,9 @@ export default createReducer(initialState, (builder) => {
     builder
         .addCase(resetFind, (state: IPersonState) => ({ ...state, searched: initialState.searched }))
     builder
-        .addCase(pending, (state: IPersonState) => ({ ...state, isLoading: true }))
+        .addCase(pending, (state: IPersonState) => ({ ...state, loading: ApiState.PENDING }))
     builder
-        .addCase(falied, (state: IPersonState, { payload }: PayloadAction<string>) => ({ ...state, isLoading: false, errorMsg: payload }))
+        .addCase(falied, (state: IPersonState, { payload }: PayloadAction<string>) => ({ ...state, loading: ApiState.FAILED, errorMsg: payload }))
     builder
-        .addCase(success, (state: IPersonState, { payload }: PayloadAction<Person>) => ({ ...state, isLoading: false, data: payload }))
+        .addCase(successded, (state: IPersonState, { payload }: PayloadAction<PersonSucceededPayload>) => ({ ...state, loading: ApiState.SUCCEEDED, ...payload }))
 })
