@@ -38,7 +38,7 @@ export enum PersonActionsType {
 
 export const setFind = createAction<string>(PersonActionsType.SET_FIND)
 export const resetFind = createAction(PersonActionsType.RESET_FIND)
-export const successded = createAction<PersonSucceededPayload>(PersonActionsType.FETCH_SUCCEEDED)
+export const succeeded = createAction<PersonSucceededPayload>(PersonActionsType.FETCH_SUCCEEDED)
 export const falied = createAction<string>(PersonActionsType.FETCH_FAILED)
 export const pending = createAction(PersonActionsType.FETCH_PENDING)
 
@@ -53,5 +53,5 @@ export default createReducer(initialState, (builder) => {
     builder
         .addCase(falied, (state: IPersonState, { payload }: PayloadAction<string>) => ({ ...state, loading: ApiState.FAILED, errorMsg: payload }))
     builder
-        .addCase(successded, (state: IPersonState, { payload }: PayloadAction<PersonSucceededPayload>) => ({ ...state, loading: ApiState.SUCCEEDED, ...payload }))
+        .addCase(succeeded, (state: IPersonState, { payload }: PayloadAction<PersonSucceededPayload>) => ({ ...state, loading: ApiState.SUCCEEDED, ...payload }))
 })
