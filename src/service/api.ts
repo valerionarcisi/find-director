@@ -1,7 +1,7 @@
 import axios from "axios";
 import { normalize, schema } from "normalizr";
 import { Person } from "../containers/Person/model";
-import { PersonSucceededPayload } from "../containers/Person/store";
+import { PersonSucceededPayload } from "../containers/Person/slice";
 
 const API_KEY = 'a90d99d87d52ef1f55e06af62b50fadc';
 const BASE_URL = 'https://api.themoviedb.org/';
