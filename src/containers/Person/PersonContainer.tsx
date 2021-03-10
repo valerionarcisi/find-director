@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useAppDispatch } from '../../app/hooks'
-import { setFind } from './store';
+import { setFind } from './slice';
 
 
 export function PersonContainer() {
