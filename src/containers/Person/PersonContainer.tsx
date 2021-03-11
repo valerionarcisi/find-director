@@ -6,7 +6,7 @@ import { setFind } from './slice';
 export function PersonContainer() {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(setFind('Martin'))
+        dispatch(setFind('Martin Scorsese'))
     }, [])
     return <div>
         dassadsas
