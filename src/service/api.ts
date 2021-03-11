@@ -11,9 +11,8 @@ const SCHEMA_FEATURE_KEY = 'person';
 // TODO: Add page
 export const queryPerson = (query: string): string => `${BASE_URL}${VERSION}/search/person?api_key=${API_KEY}&query=${query}`
 
-export const fetchPerson = async (person: string):Promise<PersonSucceededPayload> => {
+export const fetchPerson = async (person: string): Promise<PersonSucceededPayload> => {
     try {
-
         const { data } = await axios.get(queryPerson(person));
         const normalized = normalize<
             any,
