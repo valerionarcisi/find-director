@@ -1,6 +1,5 @@
 import { createAction, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit'
-import { isFailedAction } from '../../app/actions'
-import { ApiState } from '../../service/api.model'
+import { ApiState, FailedAction, isFailedAction } from '../../app/epicActions'
 import { Person } from './model'
 
 export interface IPersonState {
@@ -40,7 +39,7 @@ export enum PersonActionsType {
 export const setFind = createAction<string>(PersonActionsType.SET_FIND)
 export const resetFind = createAction(PersonActionsType.RESET_FIND)
 export const succeeded = createAction<PersonSucceededPayload>(PersonActionsType.FETCH_SUCCEEDED)
-export const falied = createAction<SerializedError>(PersonActionsType.FETCH_FAILED)
+export const falied = createAction<FailedAction>(PersonActionsType.FETCH_FAILED)
 export const pending = createAction(PersonActionsType.FETCH_PENDING)
 
 const personSlice = createSlice({
@@ -60,17 +59,16 @@ const personSlice = createSlice({
                 state.totalPages = payload.totalPages
                 state.totalResults = payload.totalResults
             })
-            .addMatcher(isFailedAction, (state: IPersonState, action: PayloadAction<SerializedError>) => {
+            .addMatcher(isFailedAction, (state: IPersonState, { payload }: FailedAction) => {
                 state.loading = ApiState.FAILED
                 state.error = {
-                    name: action.payload.name,
-                    code: action.payload.code,
-                    message: action.payload.message,
-                    stack: action.payload.stack,
+                    name: payload.name,
+                    code: payload.code,
+                    message: payload.message,
+                    stack: payload.stack,
                 }
             })
 })
 
 export const { name: featureKey } = personSlice
-
 export default personSlice.reducer

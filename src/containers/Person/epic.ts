@@ -14,7 +14,7 @@ export const fetchPerson: Epic = (actions$) =>
                 of(pending()),
                 from(api.fetchPerson(payload)).pipe(
                     map(succeeded),
-                    catchError((error: SerializedError) => of(falied(error)))
+                    catchError((error) => of(falied(error)))
                 ),
             )
         ),
