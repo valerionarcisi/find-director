@@ -8,7 +8,6 @@ const BASE_URL = 'https://api.themoviedb.org/';
 const VERSION = '3';
 const SCHEMA_FEATURE_KEY = 'person';
 
-// TODO: Add page
 export const queryPerson = (query: string): string => `${BASE_URL}${VERSION}/search/person?api_key=${API_KEY}&query=${query}`
 
 export const fetchPerson = async (person: string): Promise<PersonSucceededPayload> => {
