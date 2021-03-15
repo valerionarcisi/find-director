@@ -7,8 +7,6 @@ export function PersonContainer() {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(setFind('Martin Scorsese'))
-    }, [])
-    return <div>
-        dassadsas
-    </div>
+    }, [dispatch]);
+    return <div />
 }

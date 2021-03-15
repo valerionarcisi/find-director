@@ -18,6 +18,7 @@
     "react-redux": "^7.2.2",
     "react-scripts": "4.0.3",
     "redux-observable": "^1.2.0",
+    "styled-components": "^5.2.1",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
@@ -47,5 +48,8 @@
   },
   "devDependencies": {
     "@types/react-redux": "^7.1.16"
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }

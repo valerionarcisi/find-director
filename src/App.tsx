@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { PersonContainer } from './containers/Person/PersonContainer';
+import { PersonContainer } from './containers/Person/PersonContainer'
 
 function App() {
 
@@ -11,4 +11,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
