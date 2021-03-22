@@ -3,7 +3,7 @@ import { ApiState, FailedAction, isFailedAction } from '../../app/epicActions'
 import { Person } from './model'
 
 export interface IPersonState {
-    byIds: { [key: string]: Person } | null,
+    byIds: { [key: string]: Person } | null
     allIds: number[] | null,
     currentPage: number | null,
     totalPages: number | null,

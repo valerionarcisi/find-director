@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import personReducer, { featureKey as personFeatureKey, IPersonState, } from '../containers/Person/slice';
+import personReducer, { featureKey as personFeatureKey, IPersonState, } from '../containers/PersonContainer/slice';
 import { epicMiddleware, rootEpic } from './epicsRoot';
 
 export interface IState {
@@ -14,8 +14,6 @@ export const store = configureStore({
     reducer,
     middleware: [epicMiddleware],
     devTools: process.env.NODE_ENV !== 'production',
-    // preloadedState,
-    // enhancers: [reduxBatch]
 })
 epicMiddleware.run(rootEpic);
 

@@ -1,4 +1,4 @@
-import { Action, AnyAction, PayloadAction, SerializedError } from "@reduxjs/toolkit";
+import { AnyAction, PayloadAction, SerializedError } from "@reduxjs/toolkit";
 
 export enum ApiState {
     IDLE = 'idle',
