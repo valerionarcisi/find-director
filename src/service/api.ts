@@ -1,18 +1,20 @@
 import axios from "axios";
 import { normalize, schema } from "normalizr";
-import { Person } from "../containers/Person/model";
-import { PersonSucceededPayload } from "../containers/Person/slice";
+import { Person } from "../containers/PersonContainer/model";
+import { PersonSucceededPayload } from "../containers/PersonContainer/slice";
 
-const API_KEY = 'a90d99d87d52ef1f55e06af62b50fadc';
-const BASE_URL = 'https://api.themoviedb.org/';
-const VERSION = '3';
+export const API_KEY = 'a90d99d87d52ef1f55e06af62b50fadc';
+export const IMAGES_URL = 'https://image.tmdb.org/t/p/w500';
+export const BASE_URL = 'https://api.themoviedb.org/';
+export const VERSION = '3';
+
 const SCHEMA_FEATURE_KEY = 'person';
 
-export const queryPerson = (query: string): string => `${BASE_URL}${VERSION}/search/person?api_key=${API_KEY}&query=${query}`
+export const searchPerson = (query:string, page = 1): string => `${BASE_URL}${VERSION}/search/person?api_key=${API_KEY}&query=${query}&page=${page}`
 
 export const fetchPerson = async (person: string): Promise<PersonSucceededPayload> => {
     try {
-        const { data } = await axios.get(queryPerson(person));
+        const { data } = await axios.get(searchPerson(person));
         const normalized = normalize<
             any,
             {
