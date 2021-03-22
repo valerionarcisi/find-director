@@ -1,13 +1,23 @@
 import React from 'react';
-import './App.css';
-import { PersonContainer } from './containers/Person/PersonContainer'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { PersonContainer } from './containers/PersonContainer'
 
 function App() {
 
   return (
-    <div className="App">
-      <PersonContainer />
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/search" />
+        </Route>
+        <Route exact path="/search" component={() => <PersonContainer />} />
+      </Switch>
+    </Router>
   );
 }
 
