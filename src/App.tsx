@@ -5,7 +5,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { PersonContainer } from './containers/PersonContainer'
+import { DirectorContainer } from './containers/DirectorContainer';
+import { SearchContainer } from './containers/SearchContainer'
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
         <Route exact path="/">
           <Redirect to="/search" />
         </Route>
-        <Route exact path="/search" component={() => <PersonContainer />} />
+        <Route exact path="/search" component={SearchContainer} />
+        <Route exact path="/person/:id" component={DirectorContainer} />
       </Switch>
     </Router>
   );
