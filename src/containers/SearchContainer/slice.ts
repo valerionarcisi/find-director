@@ -58,6 +58,9 @@ const personSlice = createSlice({
                 state.currentPage = payload.currentPage
                 state.totalPages = payload.totalPages
                 state.totalResults = payload.totalResults
+                state.error = {
+                    ...initialState.error
+                }
             })
             .addMatcher(isFailedAction, (state: IPersonState, { payload }: FailedAction) => {
                 state.loading = ApiState.FAILED

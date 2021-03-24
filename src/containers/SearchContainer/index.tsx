@@ -1,10 +1,10 @@
 import React, { FormEvent, FunctionComponent } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { Director } from '../../components/Director';
+import { DirectorPreview } from './DirectorPreview';
 import { getDirector } from './selectors';
 import { setFind } from './slice';
 
-export const PersonContainer: FunctionComponent = () => {
+export const SearchContainer: FunctionComponent = () => {
     const dispatch = useAppDispatch();
 
     const handleChange = (event: FormEvent<HTMLInputElement>): void => {
@@ -12,11 +12,11 @@ export const PersonContainer: FunctionComponent = () => {
     }
 
     const directos = useAppSelector(getDirector)
-    console.log(directos)
-    return <div>
+
+return <div>
         <input type="text" name="director" onChange={handleChange} />
         {directos.map(d => (
-            <Director
+            <DirectorPreview
                 id={d.id}
                 name={d.name}
                 know_for={d.know_for}
