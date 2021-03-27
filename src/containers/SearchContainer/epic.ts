@@ -1,12 +1,12 @@
 
-import { Epic, ofType } from "redux-observable";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { ActionsObservable, Epic, ofType } from "redux-observable";
 import { from, of, concat } from "rxjs";
 import { switchMap, map, catchError } from "rxjs/operators";
 import { succeeded, pending, falied, PersonActionsType } from "./slice";
 import * as api from '../../service/api'
 
-// export const fetchPerson: Epic<PayloadAction<string>, PayloadAction<any>, RootState> = (actions$) =>
-export const fetchPerson: Epic = (actions$) =>
+export const fetchPerson: Epic = (actions$: ActionsObservable<PayloadAction<string>>) =>
     actions$.pipe(
         ofType(PersonActionsType.SET_FIND),
         switchMap(({ payload }) => concat(
@@ -15,6 +15,6 @@ export const fetchPerson: Epic = (actions$) =>
                 map(succeeded),
                 catchError((error) => of(falied(error)))
             )
-         )
+        )
         )
     )
