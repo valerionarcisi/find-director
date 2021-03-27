@@ -1,10 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import personReducer, { featureKey as personFeatureKey, IPersonState, } from '../containers/SearchContainer/slice';
+import personReducer, { featureKey as personFeatureKey, } from '../containers/SearchContainer/slice';
 import { epicMiddleware, rootEpic } from './epicsRoot';
-
-export interface IState {
-    [personFeatureKey]: IPersonState;
-}
 
 const reducer = {
     [personFeatureKey]: personReducer
