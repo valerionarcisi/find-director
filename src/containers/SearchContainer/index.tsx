@@ -1,22 +1,28 @@
-import React, { FormEvent, FunctionComponent } from 'react'
+import React, { FunctionComponent, useCallback } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { DirectorPreview } from './DirectorPreview';
+import { Person } from './model';
+import { SearchInput } from './SearchInput';
 import { getDirector } from './selectors';
 import { setFind } from './slice';
 
 export const SearchContainer: FunctionComponent = () => {
+
     const dispatch = useAppDispatch();
 
-    const handleChange = (event: FormEvent<HTMLInputElement>): void => {
-        dispatch(setFind(event.currentTarget.value))
-    }
+    const handleOnSearch = useCallback((value) => {
+        if (!!value) {
+            dispatch(setFind(value))
+        }
+    }, [dispatch])
 
     const directos = useAppSelector(getDirector)
 
-return <div>
-        <input type="text" name="director" onChange={handleChange} />
-        {directos.map(d => (
+    return <div>
+        <SearchInput onValueChange={handleOnSearch} />
+        {directos.map((d: Person) => (
             <DirectorPreview
+                key={d.id}
                 id={d.id}
                 name={d.name}
                 know_for={d.know_for}
