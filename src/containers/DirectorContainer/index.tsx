@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react"
+import React, { useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { fetchPersonDetail } from "../../service/api";
 
