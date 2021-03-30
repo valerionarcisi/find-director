@@ -2,7 +2,7 @@ import { normalize, schema } from "normalizr";
 import { Movie } from "../containers/DirectorContainer/model";
 import { Person } from "../containers/SearchContainer/model";
 import { of, Observable } from "rxjs";
-import { map, catchError, tap } from "rxjs/operators";
+import { map, catchError } from "rxjs/operators";
 import { ajax } from 'rxjs/ajax';
 import { PersonSucceededPayload } from "../containers/SearchContainer/slice";
 import { DirectorSucceeededPayload } from "../containers/DirectorContainer/slice";
