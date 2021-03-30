@@ -1,13 +1,18 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchPersonDetail } from "../../service/api";
+import { useAppDispatch } from "../../app/hooks";
+import { start } from "./slice";
 
 
 export const DirectorContainer = () => {
+    
     const { id } = useParams<{ id: string }>();
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
-       fetchPersonDetail(id);
-    }, [id]);
+        dispatch(start({ id }))
+    }, [dispatch, id])
+
 
     return <div>container director works</div>
 }
