@@ -1,13 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
 import personReducer, { featureKey as personFeatureKey, IPersonState, } from '../containers/SearchContainer/slice';
+import directorReducer, { featureKey as directorFeatureKey, IDirectorState, } from '../containers/DirectorContainer/slice';
 import { epicMiddleware, rootEpic } from './epicsRoot';
 
 export interface IState {
     [personFeatureKey]: IPersonState;
+    [directorFeatureKey]: IDirectorState;
 }
 
 const reducer = {
-    [personFeatureKey]: personReducer
+    [personFeatureKey]: personReducer,
+    [directorFeatureKey]: directorReducer
 }
 
 export const store = configureStore({
