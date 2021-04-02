@@ -1,16 +1,13 @@
-import { createAction, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit'
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { BaseApiState } from '../../app/baseModel'
 import { ApiState, FailedAction, isFailedAction } from '../../app/epicActions'
 import { Person } from './model'
 
-export interface IPersonState {
-    byIds: { [key: string]: Person } | null
-    allIds: number[] | null,
+export interface IPersonState extends BaseApiState<Person> {
     currentPage: number | null,
     totalPages: number | null,
     totalResults: number | null,
     searched: string | null,
-    loading: ApiState.IDLE | ApiState.PENDING | ApiState.FAILED | ApiState.SUCCEEDED,
-    error: SerializedError | null
 }
 
 export type PersonSucceededPayload = Pick<IPersonState, 'allIds' | 'byIds' | 'currentPage' | 'totalPages' | 'totalResults'>

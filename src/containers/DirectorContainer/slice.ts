@@ -1,13 +1,9 @@
-import { createAction, createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
+import { createAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { BaseApiState } from "../../app/baseModel";
 import { ApiState, FailedAction, isFailedAction } from "../../app/epicActions";
 import { Movie } from "./model";
 
-export interface IDirectorState {
-    byIds: { [key: string]: Movie } | null
-    allIds: number[] | null,
-    loading: ApiState.IDLE | ApiState.PENDING | ApiState.FAILED | ApiState.SUCCEEDED,
-    error: SerializedError | null
-}
+export interface IDirectorState extends BaseApiState<Movie> {}
 
 export type DirectorSucceeededPayload = Pick<IDirectorState, 'allIds' | 'byIds'>
 
